@@ -1,4 +1,5 @@
 use sea_orm_migration::{prelude::*, schema::*};
+use serde::{Deserialize, Serialize};
 
 #[derive(DeriveMigrationName)]
 pub struct Migration;
@@ -17,6 +18,10 @@ impl MigrationTrait for Migration {
                     .col(binary(Account::Password))
                     .col(double(Account::Money).default(0.0))
                     .col(big_integer(Account::Gems).default(0))
+                    .col(
+                        json(Account::Settings)
+                            .default(serde_json::to_string(&AccountSettings::default()).unwrap()),
+                    )
                     .to_owned(),
             )
             .await
@@ -39,4 +44,17 @@ enum Account {
     Money,
     Gems,
     Settings,
+}
+
+#[derive(Debug, Serialize, Deserialize)]
+struct AccountSettings {
+    enable_notifications: bool,
+}
+
+impl Default for AccountSettings {
+    fn default() -> Self {
+        Self {
+            enable_notifications: true,
+        }
+    }
 }
