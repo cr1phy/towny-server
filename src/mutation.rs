@@ -1,11 +1,9 @@
 use bcrypt::{hash, DEFAULT_COST};
+use entity::{account, prelude::*};
 use sea_orm::{ActiveModelTrait, DbConn, DbErr, DeleteResult, EntityTrait, Set};
 use uuid::Uuid;
 
-use crate::{
-    entity::{account, prelude::*},
-    forms::{CreateAccount, DeleteAccount},
-};
+use crate::forms::{CreateAccount, DeleteAccount};
 
 pub struct Mutation;
 

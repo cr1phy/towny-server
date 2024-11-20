@@ -1,7 +1,6 @@
+use entity::{account, prelude::*};
 use sea_orm::{DbConn, DbErr, EntityTrait};
 use uuid::Uuid;
-
-use crate::entity::{account, prelude::*};
 
 pub struct Query;
 

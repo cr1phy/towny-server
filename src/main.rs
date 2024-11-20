@@ -1,4 +1,4 @@
-mod entity;
+mod components;
 mod forms;
 mod handlers;
 mod mutation;
