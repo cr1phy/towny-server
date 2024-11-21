@@ -23,4 +23,5 @@ bcrypt = "0.15.1"
 borsh = { version = "1.5.3", features = ["derive"] }
 hashbrown = { version = "0.15.1", features = ["serde"] }
 rand = { version = "0.8.5", features = ["log"] }
+derive_more = { version = "1.0.0", features = ["add", "debug", "mul"] }
 

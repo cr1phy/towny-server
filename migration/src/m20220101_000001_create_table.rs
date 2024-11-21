@@ -24,7 +24,17 @@ impl MigrationTrait for Migration {
                     )
                     .to_owned(),
             )
-            .await
+            .await?;
+        manager
+            .create_table(
+                Table::create()
+                    .table(City::Table)
+                    .if_not_exists()
+                    .col(pk_auto(City::Id))
+                    .to_owned(),
+            )
+            .await?;
+        Ok(())
     }
 
     async fn down(&self, manager: &SchemaManager) -> Result<(), DbErr> {
@@ -58,3 +68,27 @@ impl Default for AccountSettings {
         }
     }
 }
+
+#[derive(DeriveIden)]
+enum City {
+    Table,
+    Id,
+    Name,
+    Owner,
+    Region,
+}
+
+// #[derive(Debug, DeriveColumn)]
+// struct Region {
+//     start: Coordinates,
+//     end: Coordinates,
+// }
+
+// #[derive(Debug, DeriveValueType, Serialize, Deserialize)]
+// struct Coordinates((u64, u64));
+
+// impl TryGetable for Coordinates {
+//     fn try_get_by<I: sea_orm::ColIdx>(res: &sea_orm::QueryResult, index: I) -> Result<Self, sea_orm::TryGetError> {
+
+//     }
+// }

@@ -1,7 +1,9 @@
 use borsh::BorshSerialize;
+use derive_more::derive::{Add, Div, Mul, Sub};
+use serde::{Deserialize, Serialize};
 
-#[derive(Debug)]
-pub struct Coordinates {}
+#[derive(Debug, Default, PartialEq, Eq, Add, Sub, Mul, Div, Serialize, Deserialize)]
+pub struct Coordinates(u64, u64);
 
 #[derive(Debug, Default, BorshSerialize)]
 pub struct Relief {}
